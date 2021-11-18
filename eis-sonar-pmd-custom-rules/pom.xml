@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.exigen.eis.sonar</groupId>
+	<artifactId>eis-sonar-pmd-custom-rules</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<name>EIS Sonar PMD Custom rules</name>
+
+	<scm>
+        <connection>scm:hg:https://vno-hg.exigengroup.com/hg/eis-thirdparty/</connection>
+        <developerConnection>scm:hg:https://vno-hg.exigengroup.com/hg/eis-thirdparty/</developerConnection>
+        <url>https://vno-hg.exigengroup.com/hg/eis-thirdparty/</url>
+    </scm>
+
+	<properties>
+		<net.sourceforge.pmd.version>5.3.2</net.sourceforge.pmd.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.sourceforge.pmd</groupId>
+			<artifactId>pmd-java</artifactId>
+			<version>${net.sourceforge.pmd.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.pmd</groupId>
+			<artifactId>pmd-jsp</artifactId>
+			<version>${net.sourceforge.pmd.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.pmd</groupId>
+			<artifactId>pmd-test</artifactId>
+			<version>${net.sourceforge.pmd.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

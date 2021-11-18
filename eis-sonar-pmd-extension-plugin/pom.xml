@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.exigen.eis.sonar</groupId>
+	<artifactId>eis-sonar-pmd-extension-plugin</artifactId>
+	<packaging>sonar-plugin</packaging>
+	<version>5.6.6-2</version>
+
+	<name>EIS Sonar PMD Extension Plugin</name>
+	<description>SonarQube plugin for custom EIS PMD rules</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.sonarsource.sonarqube</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<version>5.6.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.exigen.eis.sonar</groupId>
+			<artifactId>eis-sonar-pmd-custom-rules</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.1.1</version>
+		    <scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.17</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginClass>com.exigen.eis.sonar.pmd.plugin.PmdCustomRulesExtensionPlugin</pluginClass>
+
+					<!-- This is important. It means that this plugin extends the PMD plugin -->
+					<basePlugin>pmd</basePlugin>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

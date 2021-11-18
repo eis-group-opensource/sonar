@@ -1,0 +1,147 @@
+<rules>
+	<rule
+		key="com.exigen.eis.sonar.checkstyle.checks.javadoc.PublicApiJavadocMethodCheck">
+		<priority>MAJOR</priority>
+		<name><![CDATA[EIS coding rules - PublicApi Javadoc Method]]></name>
+		<configKey><![CDATA[Checker/TreeWalker/com.exigen.eis.sonar.checkstyle.checks.javadoc.PublicApiJavadocMethodCheck]]></configKey>
+		<description>
+			<![CDATA[
+			<p>Checks the Javadoc of a method or constructor. By default, does not check for unused throws.
+			To allow documented java.lang.RuntimeExceptions that are not declared, set property allowUndeclaredRTE to true.
+			The scope to verify is specified using the Scope class and defaults to Scope.PRIVATE. To verify another scope,
+			set property scope to a different scope.</p>
+			<p>Error messages about parameters and type parameters for which no param tags are present can be suppressed by
+			defining property allowMissingParamTags. Error messages about exceptions which are declared to be thrown, but
+			for which no throws tag is present can be suppressed by defining property allowMissingThrowsTags. Error messages
+			about methods which return non-void but for which no return tag is present can be suppressed by defining property
+			allowMissingReturnTag.</p>
+			<p>Javadoc is not required on a method that is tagged with the @Override annotation. However under Java 5 it is not
+			possible to mark a method required for an interface (this was corrected under Java 6). Hence Checkstyle supports
+			using the convention of using a single {@inheritDoc} tag instead of all the other tags.</p>
+			<p>Note that only inheritable items will allow the {@inheritDoc} tag to be used in place of comments. Static methods
+			at all visibilities, private non-static methods and constructors are not inheritable.</p>
+			]]>
+		</description>
+		
+		<param key="checkOnlyInterfaces" type="BOOLEAN">
+			<description><![CDATA[whether to check only interface definitions. Class, enumeration and annotation definitions will be skiped. Default is false]]></description>
+		</param>
+		
+		<param key="scope"
+			type="s[nothing,public,protected,package,private,anoninner]">
+			<description><![CDATA[visibility scope where Javadoc comments are checked (Set of comma delimited values)]]></description>
+		</param>
+
+		<param key="excludeScope"
+			type="s[nothing,public,protected,package,private,anoninner]">
+			<description><![CDATA[visibility scope where Javadoc comments are not checked (Set of comma delimited values)]]></description>
+		</param>
+
+		<param key="allowUndeclaredRTE" type="BOOLEAN">
+			<description><![CDATA[whether to allow documented exceptions that are not declared if they are a subclass of java.lang.RuntimeException. Default is false.]]></description>
+		</param>
+
+		<param key="allowThrowsTagsForSubclasses" type="BOOLEAN">
+			<description><![CDATA[whether to allow documented exceptions that are subclass of one of declared exception. Default is false.]]></description>
+		</param>
+
+		<param key="allowMissingParamTags" type="BOOLEAN">
+			<description><![CDATA[whether to ignore errors when a method has parameters but does not have matching param tags in the javadoc. Default is false.]]></description>
+		</param>
+
+		<param key="allowMissingThrowsTags" type="BOOLEAN">
+			<description><![CDATA[whether to ignore errors when a method declares that it throws exceptions but does have matching throws tags in the javadoc. Default is false.]]></description>
+		</param>
+
+		<param key="allowMissingReturnTag" type="BOOLEAN">
+			<description><![CDATA[whether to ignore errors when a method returns non-void type does have a return tag in the javadoc. Default is false.]]></description>
+		</param>
+
+		<param key="allowMissingPropertyJavadoc" type="BOOLEAN">
+			<description>
+				<![CDATA[Whether to allow missing Javadoc on accessor methods for properties (setters and getters).
+				The setter and getter methods must match exactly the structures below. <code> public void
+				setNumber(final int number) { mNumber = number; } public int getNumber() { return mNumber; }
+				public boolean isSomething() { return false; } </code>. Default is false.]]>
+			</description>
+		</param>
+
+		<param key="tokens" type="s[METHOD_DEF,CTOR_DEF]">
+			<description><![CDATA[definitions to check (Set of comma delimited values)]]></description>
+		</param>
+
+		<param key="suppressLoadErrors" type="BOOLEAN">
+			<description><![CDATA[When set to false all problems with loading classes would be reported as violations. Default is true.]]></description>
+			<!-- Note that default value in Checkstyle 5.5 is false -->
+			<defaultValue>true</defaultValue>
+		</param>
+	</rule>
+
+	<rule
+		key="com.exigen.eis.sonar.checkstyle.checks.javadoc.PublicApiJavadocStyleCheck">
+		<priority>MAJOR</priority>
+		<name><![CDATA[EIS coding rules - PublicApi Javadoc Style]]></name>
+		<configKey><![CDATA[Checker/TreeWalker/com.exigen.eis.sonar.checkstyle.checks.javadoc.PublicApiJavadocStyleCheck]]></configKey>
+		<description>
+			<![CDATA[
+			<p>Validates Javadoc comments to help ensure they are well formed. The following checks are performed:</p>
+			<ul>
+				<li>
+					Ensures the first sentence ends with proper punctuation (That is a period, question mark, or exclamation mark, by default).
+					Javadoc automatically places the first sentence in the method summary table and index. With out proper punctuation the Javadoc
+					may be malformed. All items eligible for the {@inheritDoc} tag are exempt from this requirement.
+				</li>
+				<li>
+					Check text for Javadoc statements that do not have any description. This includes both completely empty Javadoc, and Javadoc with
+					only tags such as @param and @return.
+				</li>
+				<li>
+					Check text for incomplete HTML tags. Verifies that HTML tags have corresponding end tags and issues an "Unclosed HTML tag found:"
+					error if not. An "Extra HTML tag found:" error is issued if an end tag is found without a previous open tag.
+				</li>
+				<li>
+					Check that a package Javadoc comment is well-formed (as described above) and NOT missing from any package-info.java files.
+				</li>
+				<li>
+					Check for allowed HTML tags. The list of allowed HTML tags is "a", "abbr", "acronym", "address", "area", "b", "bdo", "big",
+					"blockquote", "br", "caption", "cite", "code", "colgroup", "del", "div", "dfn", "dl", "em", "fieldset", "h1" to "h6", "hr",
+					"i", "img", "ins", "kbd", "li", "ol", "p", "pre", "q", "samp", "small", "span", "strong", "sub", "sup", "table", "tbody",
+					"td", "tfoot", "th", "thread", "tr", "tt", "ul"
+				</li>
+			</ul>
+			]]>
+		</description>
+		
+		<param key="checkOnlyInterfaces" type="BOOLEAN">
+			<description><![CDATA[whether to check only interface definitions. Class, enumeration and annotation definitions will be skiped. Default is false]]></description>
+		</param>
+
+		<param key="scope"
+			type="s[nothing,public,protected,package,private,anoninner]">
+			<description><![CDATA[visibility scope where Javadoc comments are checked (Set of comma delimited values)]]></description>
+		</param>
+		
+		<param key="excludeScope"
+			type="s[nothing,public,protected,package,private,anoninner]">
+			<description><![CDATA[visibility scope where Javadoc comments are not checked (Set of comma delimited values)]]></description>
+		</param>
+		
+		<param key="checkFirstSentence" type="BOOLEAN">
+			<description><![CDATA[Whether to check the first sentence for proper end of sentence. Default is true.]]></description>
+			<defaultValue>true</defaultValue>
+		</param>
+		
+		<param key="checkEmptyJavadoc" type="BOOLEAN">
+			<description><![CDATA[Whether to check if the Javadoc is missing a describing text. Default is false.]]></description>
+		</param>
+		
+		<param key="checkHtml" type="BOOLEAN">
+			<description><![CDATA[Whether to check for incomplete html tags. Default is true.]]></description>
+		</param>
+		
+		<param key="tokens"
+			type="s[INTERFACE_DEF,CLASS_DEF,METHOD_DEF,CTOR_DEF,VARIABLE_DEF]">
+			<description><![CDATA[definitions to check (Set of comma delimited values)]]></description>
+		</param>
+	</rule>
+</rules>

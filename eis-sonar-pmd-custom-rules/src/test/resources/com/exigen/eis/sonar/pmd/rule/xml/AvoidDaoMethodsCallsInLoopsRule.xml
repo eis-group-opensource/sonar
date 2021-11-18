@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+	<test-code>
+		<description>
+		<![CDATA[
+Dao object method called in for-loop.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[	
+import com.exigen.eis.sonar.pmd.rule.data.DummyDao;
+
+public class Foo {
+    public void bar() {
+    	DummyDao d = new DummyDao();
+    	int [] numbers = {1,2};
+    	for (int x : numbers ) {
+    		d.toString();
+    	}
+    }
+}
+		]]>
+		</code>
+	</test-code>
+	
+	<test-code>
+		<description>
+		<![CDATA[
+Dao object method called in while-loop.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[	
+import com.exigen.eis.sonar.pmd.rule.data.DummyDao;
+
+public class Foo {
+    public void bar() {
+    	DummyDao d = new DummyDao();
+		boolean loop = true;
+		while (loop) {
+			d.toString();
+			loop = false;
+    	}
+    }
+}
+		]]>
+		</code>
+	</test-code>
+
+	<test-code>
+		<description>
+		<![CDATA[
+Dao object method called in do-loop.
+		]]>
+		</description>
+		<expected-problems>2</expected-problems>
+		<code>
+		<![CDATA[	
+import com.exigen.eis.sonar.pmd.rule.data.DummyDao;
+
+public class Foo {
+    public void bar() {
+    	DummyDao d = new DummyDao();
+		int count = 0;
+        do {
+			d.toString();
+			if (true) {
+				d.toString();
+			}
+            count++;
+        } while (count < 1);
+        d.toString();
+    }
+}
+		]]>
+		</code>
+	</test-code>
+
+	<test-code>
+		<description>
+		<![CDATA[
+Violation should not be record for method call of Non-DAO object.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[	
+import com.exigen.eis.sonar.pmd.rule.data.DummyDao;
+
+public class Foo {
+    public void bar() {
+    	DummyDao d = new DummyDao();
+    	String notDao = "notDao";
+		int count = 0;
+        
+        // just check method call of non-dao object 
+        do {
+        	notDao.toString();
+			int [] numbers = {1,2};
+	    	
+	    	for (int x : numbers ) {
+	    		notDao.toString();
+				
+	    		while (loop) {
+					notDao.toString();
+					loop = false;
+				}
+		    }
+	    	
+            count++;
+            
+        } while (count < 1);
+        
+        d.toString();
+    }
+}
+		]]>
+		</code>
+	</test-code>
+     
+</test-data>

@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: godin
+Build-Jdk: 1.6.0_45
+Build-Time: 2014-08-20T15:40:06+0200
+Implementation-Build: 51b8f30097242f2bd6c64883f74779f141ef0691
+Plugin-BuildDate: 2014-08-20T15:40:15+0200
+Plugin-Class: org.sonar.plugins.web.WebPlugin
+Plugin-Dependencies: META-INF/lib/jboss-el-1.0_02.CR4.jar META-INF/lib
+ /el-api-1.0.jar
+Plugin-Description: Analyze HTML (also within PHP/Ruby/etc. templates)
+  and JSP/JSF code.
+Plugin-Developers: Matthijs Galesloot,Fabrice Bellingard,Dinesh Bolken
+ steyn
+Plugin-Homepage: http://docs.codehaus.org/display/SONAR/Web+Plugin
+Plugin-IssueTrackerUrl: https://jira.codehaus.org/browse/SONARWEB
+Plugin-Key: web
+Plugin-License: The Apache Software License, Version 2.0
+Plugin-Name: Web
+Plugin-Organization: SonarSource and Matthijs Galesloot
+Plugin-OrganizationUrl: http://www.sonarsource.com
+Plugin-SourcesUrl: https://github.com/SonarCommunity/sonar-web
+Plugin-TermsConditionsUrl: 
+Plugin-Version: 2.3
+Sonar-Version: 3.7
+

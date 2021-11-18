@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+	<test-code>
+		<description>
+		<![CDATA[
+Missing annotations for domain model list.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+
+@SuppressWarnings({"unchecked", "deprecation"})
+@Entity
+public class Foo {
+	
+	List fooList;
+
+}
+		]]>
+		</code>
+	</test-code>
+	
+	
+	<test-code>
+		<description>
+		<![CDATA[
+Violation should be recorded for each incorrect annotated class field.
+		]]>
+		</description>
+		<expected-problems>8</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+
+@Entity
+public class Foo {
+
+	// Incorrect defined fields
+	@OneToMany
+	List fooList1;
+	
+	@OneToMany
+	@JoinColumn
+	List fooList2;
+	
+	@JoinColumn
+	@IndexColumn
+	List fooList3;
+	
+	@IndexColumn
+	List fooList4;
+	
+	List fooList5;
+	
+	@OneToMany
+	@OrderColumn
+	List fooList6;
+	
+	@JoinColumn
+	@OrderColumn
+	List fooList7;
+	
+	@OrderColumn
+	List fooList8;
+	
+	// Correctly defined fields
+	@OneToMany
+	@JoinColumn
+	@IndexColumn
+	List correctFooList;
+	
+	String notList;
+
+}
+		]]>
+		</code>
+	</test-code>
+
+
+	<test-code>
+		<description>
+		<![CDATA[
+Violation should not be recorded for entity interfaces.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+
+@Entity
+public interface Foo {
+
+	// Incorrect defined fields
+	@OneToMany
+	List fooList1;
+	
+	@OneToMany
+	@JoinColumn
+	List fooList2;
+	
+	@JoinColumn
+	@IndexColumn
+	List fooList3;
+	
+	@IndexColumn
+	List fooList4;
+	
+	List fooList5;
+	
+	@OneToMany
+	@OrderColumn
+	List fooList6;
+	
+	@JoinColumn
+	@OrderColumn
+	List fooList7;
+	
+	@OrderColumn
+	List fooList8;
+	
+	// Correctly defined fields
+	@OneToMany
+	@JoinColumn
+	@IndexColumn
+	List correctFooList;
+	
+	String notList;
+
+}
+		]]>
+		</code>
+	</test-code>
+
+	<test-code>
+		<description>
+		<![CDATA[
+List implementation should be correctly annotated too.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.ArrayList;
+
+@Entity
+public class Foo {
+
+	ArrayList fooList;
+
+}
+		]]>
+		</code>
+	</test-code>	
+	
+	<test-code>
+		<description>
+		<![CDATA[
+Violation should not be reported for non-List fields.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+import com.exigen.eis.sonar.pmd.rule.data.DummyDao;
+
+@Entity
+public class Foo {
+
+	int notList1;
+	
+	Boolean notList2;
+	
+	String notList3;
+	
+	DummyDao notList4;
+
+}
+		]]>
+		</code>
+	</test-code>
+	
+	<test-code>
+		<description>
+		<![CDATA[
+Violation should not be reported when all required annotation added.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+
+@Entity
+public class Foo {
+	
+	@OneToMany
+	@JoinColumn
+	@IndexColumn
+	List fooList;
+	
+	@OneToMany
+	@JoinColumn
+	@IndexColumn(name = "Test")
+	List fooBarList;
+	
+	@OneToMany
+	@JoinColumn
+	@OrderColumn
+	List barList;
+
+}
+		]]>
+		</code>
+	</test-code>
+	
+	
+	<test-code>
+		<description>
+		<![CDATA[
+For non-Entity classes violation should not be recorded.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[	
+import java.util.List;
+
+@SuppressWarnings({"unchecked", "deprecation"})
+public class Foo {
+	
+	List fooList;
+
+}
+		]]>
+		</code>
+	</test-code>
+     
+</test-data>

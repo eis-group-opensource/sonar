@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+
+	<test-code>
+		<description>
+		<![CDATA[
+Class which extends Dao incorrecly named.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[
+public class Foo extends FooDao {
+}
+		]]>
+		</code>
+	</test-code>
+     
+     
+	<test-code>
+		<description>
+		<![CDATA[
+Class which extends Dao incorrecly named. Rule should be case insensitive.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[
+public class Foo extends FooDAO {
+}
+		]]>
+		</code>
+	</test-code>
+     
+     
+     <test-code>
+		<description>
+		<![CDATA[
+Dao implementation incorrectly named.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[
+public class Foo implements Bar, FooDao {
+}
+		]]>
+		</code>
+	</test-code>
+     
+     
+     <test-code>
+		<description>
+		<![CDATA[
+Dao implementation incorrectly named. Rule should be case insensitive.
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[
+public class Foo implements Bar, FooDAO {
+}
+		]]>
+		</code>
+     </test-code>
+     
+     
+	<test-code>
+		<description>
+		<![CDATA[
+Only single violation should be recorded when Dao exist on implementation and extends list
+		]]>
+		</description>
+		<expected-problems>1</expected-problems>
+		<code>
+		<![CDATA[
+public class Foo extends FooDao implements BarDao, FooDAO {
+}
+		]]>
+		</code>
+	</test-code>
+     
+     
+	<test-code>
+		<description>
+		<![CDATA[
+Rule should not be violated when class name correctly named.
+		]]>
+		</description>
+		<expected-problems>0</expected-problems>
+		<code>
+		<![CDATA[
+public class FooDao extends FooDao implements BarDao, FooDAO {
+}
+		]]>
+		</code>
+	</test-code>
+          
+</test-data>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+	<test-code>
+		<description><![CDATA[
+Test input parameter annotated with internal anotation and class annotated @CanInvoke.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+import com.exigen.eis.sonar.pmd.rule.data.DemoAnnotation;
+@CanInvoke
+public class DemoMethod {
+    public DemoAnnotation medhod(DemoAnnotation demo) {
+    }
+}
+     ]]></code>
+</test-code>
+     
+<test-code>
+		<description><![CDATA[
+Test input parameter annotated with internal anotation and class annotated @CanExtend.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+import com.exigen.eis.sonar.pmd.rule.data.DemoAnnotation;
+@CanExtend
+public class DemoMethod {
+    public void medhod(DemoAnnotation demo) {
+    }
+}
+     ]]></code>
+</test-code>   
+
+<test-code>
+		<description><![CDATA[
+Test return parameter annotated with internal anotation and class annotated @CanExtend.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+import com.exigen.eis.sonar.pmd.rule.data.DemoAnnotation;
+@CanExtend
+public class DemoMethod {
+    public DemoAnnotation medhod() {
+    return null;
+    }
+}
+     ]]></code>
+</test-code>   
+
+<test-code>
+		<description><![CDATA[
+Test return parameter annotated with internal anotation and class annotated @CanInvode.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+import com.exigen.eis.sonar.pmd.rule.data.DemoAnnotation;
+@CanInvoke
+public class DemoMethod {
+    public DemoAnnotation medhod() {
+    return null;
+    }
+}
+     ]]></code>
+</test-code>   
+
+<test-code>
+		<description><![CDATA[
+Test standart java class
+     ]]></description>
+     <expected-problems>0</expected-problems>
+     <code><![CDATA[
+@CanInvoke
+public class DemoMethod {
+    public String medhod() {
+    return null;
+    }
+}
+     ]]></code>
+</test-code>  
+
+<test-code>
+		<description><![CDATA[
+Test class without annotation 
+     ]]></description>
+     <expected-problems>0</expected-problems>
+     <code><![CDATA[
+public class DemoMethod {
+    public String medhod(int demo, String name) {
+    return null;
+    }
+}
+     ]]></code>
+</test-code>  
+     
+</test-data>
+
+

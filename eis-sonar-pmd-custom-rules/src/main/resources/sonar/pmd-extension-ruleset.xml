@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<ruleset name="EIS PMD Custom ruleset"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+    xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>
+        EIS PMD Custom ruleset
+    </description>
+	
+	<rule class="com.exigen.eis.sonar.pmd.rule.EntityMustBeAnnotatedWithDiscriminatorColumnRule"
+			language="java"
+			name="EntityMustBeAnnotatedWithDiscriminatorColumnRule"
+			message="Class annotated with @Entity and @CanExtend must be annotated with @DiscriminatorColumn"
+		 	typeResolution="true">
+		<priority>3</priority>
+	</rule>
+	
+	<rule class="com.exigen.eis.sonar.pmd.rule.AvoidInstantiatingDaoObjectsInLoopsRule"
+			language="java"
+			name="AvoidInstantiatingDaoObjectsInLoopsRule"
+			message="DAO object should not be instantiated in loop" >
+		<priority>3</priority>
+		<example><![CDATA[
+public class Foo {
+    public void fooBar() {
+        int count = 1;
+        do {
+            FooDao dao1 = new FooDao(); // <- violation
+            count++;
+        } while (count < 4);
+        FooDao dao2 = new FooDao();
+    }
+}
+	]]></example>
+	</rule>
+
+	<rule class="com.exigen.eis.sonar.pmd.rule.DaoClassNamingConventionsRule"
+			language="java"
+			name="DaoClassNamingConventionsRule"
+			message="DAO implementation or DAO child class name should end up with Dao/DAO">
+		<priority>5</priority>
+		<example>
+		<![CDATA[
+public class Foo extends FooDao {
+}
+		]]>
+		</example>
+	</rule>
+	
+	<rule class="com.exigen.eis.sonar.pmd.rule.AvoidDaoMethodsCallsInLoopsRule"
+			language="java"
+			name="AvoidDaoMethodsCallsInLoopsRule"
+			message="DAO methods should not be called inside loop" >
+		<priority>3</priority>
+		<example>
+		<![CDATA[
+public class Foo {
+    public void bar() {
+    	FooDao dao = new FooDao();
+		boolean loop = true;
+		while (loop) {
+			dao.flush(); // <- violation
+			loop = false;
+    	}
+    }
+}
+		]]>
+		</example>
+	</rule>
+	
+	<rule class="com.exigen.eis.sonar.pmd.rule.AvoidUseInternalAnnotatedClassInPublicClassRule"
+			language="java"
+			name="AvoidUseInternalAnnotatedClassInPublicClassRule"
+			message="Class annotated with @CanInvoke or @CanExtend which method input or output types must not be annotated with @Internal annotation. Types must be annotated with @CanInvoke or standart java classes"
+			typeResolution="true">
+		<priority>3</priority>
+	</rule>
+	
+	<rule class="com.exigen.eis.sonar.pmd.rule.DomainModelListAnnotationRule"
+			language="java"
+			name="DomainModelListAnnotationRule"
+			message="Domain model List field should be correctly annotated." 
+			typeResolution="true">
+		<priority>3</priority>
+		<example>
+		<![CDATA[
+@Entity
+public class Foo {
+	public void bar() {
+    	
+		List fooList1; // <- violation
+    	
+		@OneToMany
+		List fooList2; // <- violation
+		
+		@OneToMany
+		@JoinColumn
+		@IndexColumn
+		List fooList3;
+		
+		@OneToMany
+		@JoinColumn
+		@OrderColumn
+		List fooList4;
+		
+    }
+}
+		]]>
+		</example>
+	</rule>
+	
+</ruleset>
+
+
+

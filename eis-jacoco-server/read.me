@@ -1,0 +1,16 @@
+Build the sources:
+mvn clean install
+
+Build docker image:
+docker build --no-cache .
+
+Run docker image:
+docker run --hostname hostname -p 6300:6300 -p 8010:8010 -d image_name
+
+Run jar on VM:
+nohup java -DPORT_SERVICE=8080  -jar JacocoServer-1.0-SNAPSHOT-jar-with-dependencies.jar & disown
+
+Usage:
+hostname:port/jacoco/logs - show logs
+hostname:port/jacoco/dump - retrieve data from agents
+hostname:port/jacoco/getDump - download exec file.

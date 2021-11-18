@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+	<test-code>
+		<description><![CDATA[
+For-Loop instantiating new *Dao object.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+public class Foo {
+    public void bar() {
+    	int [] numbers = {1,2};
+    	for (int x : numbers ) {
+    		FooDao dao = new FooDao();
+    	}
+    }
+}
+     ]]></code>
+     </test-code>
+     <test-code>
+		<description><![CDATA[
+While-Loop instantiating new *Dao object.
+     ]]></description>
+     <expected-problems>1</expected-problems>
+     <code><![CDATA[
+public class Foo {
+    public void bar() {
+    	boolean loop = true;
+    	while (loop) {
+    		FooDao dao = new FooDao();
+    		loop = false;
+    	}
+    }
+}
+     ]]></code>
+     </test-code>
+     <test-code>
+		<description><![CDATA[
+Do-Loop instantiating new *Dao object.
+     ]]></description>
+     <expected-problems>2</expected-problems>
+     <code><![CDATA[
+public class Foo {
+    public void bar() {
+		int count = 1;
+        do {
+            FooDao dao1 = new FooDao();
+            FooDao dao2 = new FooDao();
+            count++;
+        } while (count < 4);
+        FooDao dao3 = new FooDao();
+    }
+}
+     ]]></code>
+     </test-code>
+</test-data>

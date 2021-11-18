@@ -1,0 +1,75 @@
+<rules>
+	<!-- Extension written in Java -->
+	<rule>
+		<key>DaoClassNamingConventionsRule</key>
+		<name>EIS coding rules - DAO Class Naming Convention Check</name>
+		<description>DAO implementation or DAO child class name should end up with Dao/DAO.</description>
+		
+		<!-- path to definition -->
+		<configKey>sonar/pmd-extension-ruleset.xml/DaoClassNamingConventionsRule</configKey>
+		
+		<!-- Default priority ("severity"). It can be changed while activating the rule in Quality profile -->
+		<!-- Possible values are: INFO, MINOR, MAJOR, CRITICAL, BLOCKER. Default value is MAJOR -->
+		<priority>INFO</priority>
+	</rule>
+		
+	<rule>
+		<key>EntityMustBeAnnotatedWithDiscriminatorColumnRule</key>
+		<name>EIS coding rules - Entity must be annotated with discriminator column</name>
+		<description>Class annotated with @Entity and @CanExtend must be annotated with @DiscriminatorColumn.</description>
+		<configKey>sonar/pmd-extension-ruleset.xml/EntityMustBeAnnotatedWithDiscriminatorColumnRule</configKey>
+		<priority>MAJOR</priority>
+	</rule>
+	
+	<rule>
+		<key>AvoidInstantiatingDaoObjectsInLoopsRule</key>
+		<name>EIS coding rules - Avoid instantiating DAO objects in loops</name>
+		<description>DAO object should not be instantiated in loop.</description>
+		<configKey>sonar/pmd-extension-ruleset.xml/AvoidInstantiatingDaoObjectsInLoopsRule</configKey>
+		<priority>MAJOR</priority>
+	</rule>
+
+	<rule>
+		<key>AvoidDaoMethodsCallsInLoopsRule</key>
+		<name>EIS coding rules - Avoid DAO methods calls in loops</name>
+		<description>DAO methods should not be called inside loop.</description>
+		<configKey>sonar/pmd-extension-ruleset.xml/AvoidDaoMethodsCallsInLoopsRule</configKey>
+		<priority>MAJOR</priority>
+	</rule>
+
+	<rule>
+		<key>AvoidUseInternalAnnotatedClassInPublicClassRule</key>
+		<name>EIS coding rules - Avoid use internal annotated class in public class</name>
+		<description>Checks if class annotated with @CanInvoke or @CanExtend does not have method which uses @Internal as return/argument type.</description>
+		<configKey>sonar/pmd-extension-ruleset.xml/AvoidUseInternalAnnotatedClassInPublicClassRule</configKey>
+		<priority>MAJOR</priority>
+	</rule>
+
+	<rule>
+		<key>DomainModelListAnnotationRule</key>
+		<name>EIS coding rules - Domain model List annotation rule</name>
+		<description>
+			<![CDATA[
+			<p> Check if domain model List has correct annotation set. </p>
+			
+			<p> Examples of correctly annotated lists: </p>
+			@OneToMany </br>
+			@JoinColumn </br>
+			@IndexColumn </br>
+			List ... </br>
+			
+			<p> or </p></br>
+
+			@OneToMany </br>
+			@JoinColumn </br>
+			@OrderColumn </br>
+			List ... </br>
+			
+			<p> Violation registered if at least one annotation is missing. </p>
+			]]>
+		</description>
+		<configKey>sonar/pmd-extension-ruleset.xml/DomainModelListAnnotationRule</configKey>
+		<priority>MAJOR</priority>
+	</rule>
+	
+</rules>
